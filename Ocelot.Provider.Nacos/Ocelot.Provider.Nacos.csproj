@@ -1,20 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	
-  <Import Project="..\build\common.targets" />
-  <PropertyGroup>
-    <Copyright>softlgl</Copyright>
-    <Owners>softlgl</Owners>
-    <PackageProjectUrl>https://github.com/softlgl/Ocelot.Provider.Nacos</PackageProjectUrl>
-    <Title>Ocelot.Provider.Nacos</Title>
-    <Description>Repo for Nacos integration with Ocelot</Description>
-    <Version>1.2.1</Version>
-  </PropertyGroup>
+	<!-- 导入通用的构建目标 -->
+	<Import Project="..\build\common.targets" />
 
-  <ItemGroup>
-    <PackageReference Include="nacos-sdk-csharp" Version="1.3.5" />
-    <PackageReference Include="Ocelot" Version="20.0.0" />   
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
-    <PackageReference Include="EasyCaching.InMemory" Version="1.9.2" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-  </ItemGroup>
+	<!-- 设置项目属性 -->
+	<PropertyGroup>
+		<Copyright>softlgl</Copyright>
+		<!-- 版权信息 -->
+		<Owners>softlgl</Owners>
+		<!-- 所有者信息 -->
+		<PackageProjectUrl>https://github.com/softlgl/Ocelot.Provider.Nacos</PackageProjectUrl>
+		<!-- 包的项目 URL -->
+		<Title>Ocelot.Provider.Nacos</Title>
+		<!-- 项目标题 -->
+		<Description>Repo for Nacos integration with Ocelot</Description>
+		<!-- 项目描述 -->
+		<Version>1.2.1</Version>
+		<!-- 版本号 -->
+	</PropertyGroup>
+
+	<!-- 引用的 NuGet 包 -->
+	<ItemGroup>
+		<PackageReference Include="nacos-sdk-csharp" Version="1.3.5" />
+		<!-- Nacos SDK 的引用 -->
+		<PackageReference Include="Ocelot" Version="20.0.0" />
+		<!-- Ocelot 的引用 -->
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+		<!-- Microsoft.Extensions.Hosting.Abstractions 的引用 -->
+		<PackageReference Include="EasyCaching.InMemory" Version="1.9.2" />
+		<!-- EasyCaching.InMemory 的引用 -->
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+		<!-- Microsoft.Extensions.DependencyInjection 的引用 -->
+	</ItemGroup>
 </Project>

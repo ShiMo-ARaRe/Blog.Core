@@ -1,50 +1,71 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<!-- 导入通用的构建目标 -->
+	<Import Project="..\build\common.targets" />
 
-  <Import Project="..\build\common.targets" />
-  <PropertyGroup>
-    <IsPackable>false</IsPackable>
-	<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
-  </PropertyGroup>
+	<!-- 设置项目属性 -->
+	<PropertyGroup>
+		<IsPackable>false</IsPackable>
+		<!-- 禁用 NuGet 打包 -->
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+		<!-- 避免发布输出文件重复报错 -->
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="appsettings.json" />
-  </ItemGroup>
+	<!-- 移除默认的 appsettings.json -->
+	<ItemGroup>
+		<None Remove="appsettings.json" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Include="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
+	<!-- 添加自定义的 appsettings.json -->
+	<ItemGroup>
+		<Content Include="appsettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<!-- 始终复制到输出目录 -->
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<!-- 发布时保留最新版本 -->
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-    <PackageReference Include="Moq" Version="4.20.69" />
-    <PackageReference Include="xunit" Version="2.6.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<!-- 引用的 NuGet 包 -->
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+		<PackageReference Include="Moq" Version="4.20.69" />
+		<PackageReference Include="xunit" Version="2.6.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.5.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Blog.Core.Api\Blog.Core.Api.csproj" />
-  </ItemGroup>
+	<!-- 引用的项目 -->
+	<ItemGroup>
+		<ProjectReference Include="..\Blog.Core.Api\Blog.Core.Api.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="WMBlog.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<!-- 添加数据库文件 WMBlog.db -->
+	<ItemGroup>
+		<None Update="WMBlog.db">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<!-- 始终复制到输出目录 -->
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Update="appsettings.json">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
+	<!-- 更新 appsettings.json -->
+	<ItemGroup>
+		<Content Update="appsettings.json">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<!-- 排除单文件发布 -->
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<!-- 始终复制到输出目录 -->
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<!-- 发布时保留最新版本 -->
+		</Content>
+	</ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
-
+	<!-- Visual Studio 用户属性 -->
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties appsettings_1json__JsonSchema="" />
+			<!-- appsettings.json 的 JSON 模式 -->
+		</VisualStudio>
+	</ProjectExtensions>
 </Project>

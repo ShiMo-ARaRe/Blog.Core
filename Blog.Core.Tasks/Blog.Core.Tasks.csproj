@@ -1,15 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+	<!-- 导入通用的构建目标 -->
 	<Import Project="..\build\common.targets" />
 
-  <ItemGroup>
-    <PackageReference Include="Quartz" Version="3.7.0" />
-  </ItemGroup>
+	<!-- 引用的 NuGet 包 -->
+	<ItemGroup>
+		<PackageReference Include="Quartz" Version="3.7.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Blog.Core.Common\Blog.Core.Common.csproj" />
-    <ProjectReference Include="..\Blog.Core.IServices\Blog.Core.IServices.csproj" />
-    <ProjectReference Include="..\Blog.Core.Repository\Blog.Core.Repository.csproj" />
-  </ItemGroup>
-
+	<!-- 引用的其他项目 -->
+	<ItemGroup>
+		<ProjectReference Include="..\Blog.Core.Common\Blog.Core.Common.csproj" />
+		<ProjectReference Include="..\Blog.Core.IServices\Blog.Core.IServices.csproj" />
+		<ProjectReference Include="..\Blog.Core.Repository\Blog.Core.Repository.csproj" />
+	</ItemGroup>
 </Project>

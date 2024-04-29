@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+	<!-- 导入通用的构建目标 -->
 	<Import Project="..\build\common.targets" />
 
+	<!-- 引用的 NuGet 包 -->
 	<ItemGroup>
 		<PackageReference Include="Mapster" Version="7.4.0" />
 	</ItemGroup>
 
+	<!-- 引用的其他项目 -->
 	<ItemGroup>
 		<ProjectReference Include="..\Blog.Core.Common\Blog.Core.Common.csproj" />
 	</ItemGroup>
-
 </Project>

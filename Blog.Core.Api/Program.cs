@@ -35,21 +35,21 @@ builder.Host
     .UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>(builder =>
     {
-        builder.RegisterModule(new AutofacModuleRegister());
-        builder.RegisterModule<AutofacPropertityModuleReg>();
+        builder.RegisterModule(new AutofacModuleRegister());//#
+        builder.RegisterModule<AutofacPropertityModuleReg>();//#
     })
     .ConfigureAppConfiguration((hostingContext, config) =>
     {
-        hostingContext.Configuration.ConfigureApplication();
+        hostingContext.Configuration.ConfigureApplication();//#
         config.Sources.Clear();
         config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: false);
         config.AddConfigurationApollo("appsettings.apollo.json");
     });
-builder.ConfigureApplication();
+builder.ConfigureApplication();//#
 
 // 2、配置服务
-builder.Services.AddSingleton(new AppSettings(builder.Configuration));
-builder.Services.AddAllOptionRegister();
+builder.Services.AddSingleton(new AppSettings(builder.Configuration));//#
+builder.Services.AddAllOptionRegister();//#
 
 builder.Services.AddUiFilesZipSetup(builder.Environment);
 
@@ -121,7 +121,7 @@ builder.Services.AddEventBusSetup();
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
+builder.Services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>()); //#
 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
 // 3、配置中间件

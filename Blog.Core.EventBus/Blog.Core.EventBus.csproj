@@ -1,24 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<!-- 导入通用的构建目标 -->
+	<Import Project="..\build\common.targets" />
 
-  <Import Project="..\build\common.targets" />
+	<!-- 引用的 NuGet 包 -->
+	<ItemGroup>
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+		<!-- Autofac 的依赖注入扩展 -->
+		<PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
+		<!-- Autofac 的动态代理扩展 -->
+		<PackageReference Include="Confluent.Kafka" Version="2.3.0" />
+		<!-- Confluent.Kafka，用于 Kafka 消息队列 -->
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+		<!-- Microsoft.Extensions.Logging，用于日志记录 -->
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<!-- Newtonsoft.Json，用于 JSON 序列化和反序列化 -->
+		<PackageReference Include="Polly" Version="8.2.0" />
+		<!-- Polly，用于处理故障和重试策略 -->
+		<PackageReference Include="protobuf-net" Version="3.2.26" />
+		<!-- protobuf-net，用于 Protocol Buffers 序列化 -->
+		<PackageReference Include="RabbitMQ.Client" Version="6.6.0" />
+		<!-- RabbitMQ.Client，用于 RabbitMQ 消息队列 -->
+	</ItemGroup>
 
-
-  <ItemGroup>
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
-    <PackageReference Include="Confluent.Kafka" Version="2.3.0" />
-   
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
-   
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Polly" Version="8.2.0" />
-    <PackageReference Include="protobuf-net" Version="3.2.26" />
-    <PackageReference Include="RabbitMQ.Client" Version="6.6.0" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <ProjectReference Include="..\Blog.Core.Common\Blog.Core.Common.csproj" />
-  </ItemGroup>
-
+	<!-- 引用的项目 -->
+	<ItemGroup>
+		<ProjectReference Include="..\Blog.Core.Common\Blog.Core.Common.csproj" />
+		<!-- 引用了 Blog.Core.Common 项目 -->
+	</ItemGroup>
 </Project>

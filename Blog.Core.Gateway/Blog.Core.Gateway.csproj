@@ -1,38 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<!-- 导入通用的构建目标 -->
+	<Import Project="..\build\common.targets" />
 
-  <Import Project="..\build\common.targets" />
+	<!-- 配置条件：只在 Debug | AnyCPU 配置下生效 -->
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<!-- 指定 XML 文档文件路径 -->
+		<DocumentationFile>..\Blog.Core.Gateway\Blog.Core.Gateway.xml</DocumentationFile>
+		<!-- 忽略指定警告编码 -->
+		<NoWarn>1701;1702;1591</NoWarn>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\Blog.Core.Gateway\Blog.Core.Gateway.xml</DocumentationFile>
-    <NoWarn>1701;1702;1591</NoWarn>
-  </PropertyGroup>
+	<!-- 移除指定的编译项 -->
+	<ItemGroup>
+		<Compile Remove="Extensions\ApiResponseHandler.cs" />
+		<Compile Remove="Helper\HeaderDelegatingHandler.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Extensions\ApiResponseHandler.cs" />
-    <Compile Remove="Helper\HeaderDelegatingHandler.cs" />
-  </ItemGroup>
+	<!-- 移除指定的 None 项 -->
+	<ItemGroup>
+		<None Remove="index.html" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Remove="index.html" />
-  </ItemGroup>
+	<!-- 添加嵌入资源项 -->
+	<ItemGroup>
+		<EmbeddedResource Include="index.html" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="index.html" />
-  </ItemGroup>
+	<!-- 引用的 NuGet 包 -->
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" NoWarn="NU1605" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.0" NoWarn="NU1605" />
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.0" />
+		<PackageReference Include="Ocelot" Version="20.0.0" />
+		<PackageReference Include="Ocelot.Provider.Consul" Version="20.0.0" />
+		<PackageReference Include="Ocelot.Provider.Polly" Version="20.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" NoWarn="NU1605" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.0" NoWarn="NU1605" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.0" />
-    <PackageReference Include="Ocelot" Version="20.0.0" />
-    <PackageReference Include="Ocelot.Provider.Consul" Version="20.0.0" />
-    <PackageReference Include="Ocelot.Provider.Polly" Version="20.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Blog.Core.Extensions\Blog.Core.Extensions.csproj" />
-    <ProjectReference Include="..\Blog.Core.Model\Blog.Core.Model.csproj" />
-  </ItemGroup>
-
+	<!-- 引用的项目 -->
+	<ItemGroup>
+		<ProjectReference Include="..\Blog.Core.Extensions\Blog.Core.Extensions.csproj" />
+		<ProjectReference Include="..\Blog.Core.Model\Blog.Core.Model.csproj" />
+	</ItemGroup>
 </Project>

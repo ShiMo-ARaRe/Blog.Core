@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+	<!-- 导入通用的构建目标 -->
   <Import Project="..\build\common.targets" />
-
+	
+	<!-- 设置项目属性 -->
   <ItemGroup>
+	  <!-- 指定 TextTemplatingFileGenerator 生成器 -->
     <None Update="Blog.Core.FrameWork.Entity\Blog.Core.FrameWork.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Blog.Core.FrameWork.cs</LastGenOutput>
@@ -23,12 +25,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Blog.Core.FrameWork.Services.cs</LastGenOutput>
     </None>
+	  <!-- ... 其他类似的 None 配置 ... -->
   </ItemGroup>
 
+	<!-- 引用的服务 -->
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
+	<!-- 编译项配置 -->
   <ItemGroup>
     <Compile Update="Blog.Core.FrameWork.IRepository\Blog.Core.FrameWork.IRepository.cs">
       <DesignTime>True</DesignTime>
@@ -50,6 +55,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Blog.Core.FrameWork.Services.tt</DependentUpon>
     </Compile>
+	  <!-- ... 其他类似的 Compile 配置 ... -->
   </ItemGroup>
 
 </Project>
