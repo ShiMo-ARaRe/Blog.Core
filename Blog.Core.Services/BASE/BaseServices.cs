@@ -23,6 +23,7 @@ namespace Blog.Core.Services.BASE
 
         public ISqlSugarClient Db => BaseDal.Db;
 
+        #region 根据ID来查询（不适用于联合主键
         public async Task<TEntity> QueryById(object objId)
         {
             return await BaseDal.QueryById(objId);
@@ -50,7 +51,9 @@ namespace Blog.Core.Services.BASE
         {
             return await BaseDal.QueryByIDs(lstIds);
         }
+        #endregion
 
+        #region 插入
         /// <summary>
         /// 写入实体数据
         /// </summary>
@@ -70,7 +73,9 @@ namespace Blog.Core.Services.BASE
         {
             return await BaseDal.Add(listEntity);
         }
+        #endregion
 
+        #region 更新
         /// <summary>
         /// 更新实体数据
         /// </summary>
@@ -109,8 +114,9 @@ namespace Blog.Core.Services.BASE
         {
             return await BaseDal.Update(entity, lstColumns, lstIgnoreColumns, where);
         }
+        #endregion
 
-
+        #region 删除
         /// <summary>
         /// 根据实体删除一条数据
         /// </summary>
@@ -140,8 +146,9 @@ namespace Blog.Core.Services.BASE
         {
             return await BaseDal.DeleteByIds(ids);
         }
+        #endregion
 
-
+        #region 简单查询
         /// <summary>
         /// 功能描述:查询所有数据
         /// 作　　者:AZLinli.Blog.Core
@@ -228,7 +235,9 @@ namespace Blog.Core.Services.BASE
         {
             return await BaseDal.Query(where, orderByFileds);
         }
+        #endregion
 
+        #region 原生sql查询
         /// <summary>
         /// 根据sql语句查询
         /// </summary>
@@ -250,7 +259,9 @@ namespace Blog.Core.Services.BASE
         {
             return await BaseDal.QueryTable(sql, parameters);
         }
+        #endregion
 
+        #region 分页查询
         /// <summary>
         /// 功能描述:查询前N条数据
         /// 作　　者:AZLinli.Blog.Core
@@ -330,7 +341,9 @@ namespace Blog.Core.Services.BASE
             return await BaseDal.QueryPage(whereExpression,
                 pageIndex, pageSize, orderByFileds);
         }
+        #endregion
 
+        #region 多表查询
         public async Task<List<TResult>> QueryMuch<T, T2, T3, TResult>(Expression<Func<T, T2, T3, object[]>> joinExpression, Expression<Func<T, T2, T3, TResult>> selectExpression, Expression<Func<T, T2, T3, bool>> whereLambda = null) where T : class, new()
         {
             return await BaseDal.QueryMuch(joinExpression, selectExpression, whereLambda);
@@ -341,6 +354,7 @@ namespace Blog.Core.Services.BASE
             var express = DynamicLinqFactory.CreateLambda<TEntity>(pagination.Conditions);
             return await QueryPage(express, pagination.PageIndex, pagination.PageSize, pagination.OrderByFileds);
         }
+        #endregion
 
         #region 分表
 

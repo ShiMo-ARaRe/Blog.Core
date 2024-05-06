@@ -31,12 +31,13 @@ namespace Blog.Core.Services
         }
 
         /// <summary>
-        /// 获取全部 角色接口(按钮)关系数据
+        /// 获取角色-接口-按钮关系表中未删除的记录，并将结果存储在 RoleModulePermission 中。
         /// </summary>
         /// <returns></returns>
-        [Caching(AbsoluteExpiration = 10)]
+        [Caching(AbsoluteExpiration = 10)] //缓存10分钟
         public async Task<List<RoleModulePermission>> GetRoleModule()
         {
+
             var roleModulePermissions = await base.Query(a => a.IsDeleted == false);
             var roles = await _roleRepository.Query(a => a.IsDeleted == false);
             var modules = await _moduleRepository.Query(a => a.IsDeleted == false);
@@ -49,7 +50,7 @@ namespace Blog.Core.Services
             //var roles = await rolesAsync;
             //var modules = await modulesAsync;
 
-
+            //
             if (roleModulePermissions.Count > 0)
             {
                 foreach (var item in roleModulePermissions)
@@ -62,23 +63,35 @@ namespace Blog.Core.Services
             return roleModulePermissions;
         }
 
+        /// <summary>
+        /// 获取角色-接口-按钮关系表中未删除的记录，并将结果存储在 TestMuchTableResult 中
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<TestMuchTableResult>> QueryMuchTable()
         {
             return await _dal.QueryMuchTable();
         }
 
+        /// <summary>
+        /// 角色权限Map
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<RoleModulePermission>> RoleModuleMaps()
         {
             return await _dal.RoleModuleMaps();
         }
 
+        /// <summary>
+        /// 查询出角色-菜单-接口关系表全部Map属性数据
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<RoleModulePermission>> GetRMPMaps()
         {
             return await _dal.GetRMPMaps();
         }
 
         /// <summary>
-        /// 批量更新菜单与接口的关系
+        /// 批量更新菜单与接口的关系（保持数据的实时性
         /// </summary>
         /// <param name="permissionId">菜单主键</param>
         /// <param name="moduleId">接口主键</param>

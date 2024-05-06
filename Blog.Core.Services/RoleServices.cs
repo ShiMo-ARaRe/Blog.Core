@@ -14,7 +14,7 @@ namespace Blog.Core.Services
     public class RoleServices : BaseServices<Role>, IRoleServices
     {
        /// <summary>
-       /// 
+       /// 根据角色名查询角色表
        /// </summary>
        /// <param name="roleName"></param>
        /// <returns></returns>
@@ -22,7 +22,7 @@ namespace Blog.Core.Services
         {
             Role role = new Role(roleName);
             Role model = new Role();
-            var userList = await base.Query(a => a.Name == role.Name && a.Enabled);
+            var userList = await base.Query(a => a.Name == role.Name && a.Enabled); //Enabled表示是否激活
             if (userList.Count > 0)
             {
                 model = userList.FirstOrDefault();
@@ -37,7 +37,12 @@ namespace Blog.Core.Services
 
         }
 
-        [Caching(AbsoluteExpiration = 30)]
+        /// <summary>
+        /// 根据角色ID获取角色名
+        /// </summary>
+        /// <param name="rid"></param>
+        /// <returns></returns>
+        [Caching(AbsoluteExpiration = 30)]  //这是一个缓存特性，用于将方法的结果缓存起来。这里表示30分钟后过期。
         public async Task<string> GetRoleNameByRid(int rid)
         {
             return ((await base.QueryById(rid))?.Name);
