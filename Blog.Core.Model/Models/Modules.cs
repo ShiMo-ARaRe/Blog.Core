@@ -23,12 +23,12 @@ namespace Blog.Core.Model.Models
         public bool? IsDeleted { get; set; }
 
         /// <summary>
-        /// 名称
+        /// 接口名称
         /// </summary>
         [SugarColumn(Length = 50, IsNullable = true)]
         public string Name { get; set; }
         /// <summary>
-        /// 菜单链接地址
+        /// 菜单链接地址（接口地址
         /// </summary>
         [SugarColumn(Length = 100, IsNullable = true)]
         public string LinkUrl { get; set; }
@@ -43,7 +43,7 @@ namespace Blog.Core.Model.Models
         [SugarColumn(Length = 2000, IsNullable = true)]
         public string Controller { get; set; }
         /// <summary>
-        /// Action名称
+        /// Action名称（方法名称
         /// </summary>
         [SugarColumn(Length = 2000, IsNullable = true)]
         public string Action { get; set; }

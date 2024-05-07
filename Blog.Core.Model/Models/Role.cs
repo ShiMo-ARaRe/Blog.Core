@@ -10,19 +10,19 @@ namespace Blog.Core.Model.Models
     {
         public Role()
         {
-            OrderSort = 1;
-            CreateTime = DateTime.Now;
-            ModifyTime = DateTime.Now;
-            IsDeleted = false;
+            OrderSort = 1;  //排序
+            CreateTime = DateTime.Now;  //创建时间
+            ModifyTime = DateTime.Now;  //修改时间
+            IsDeleted = false;  //是否删除
         }
         public Role(string name)
         {
-            Name = name;
-            Description = "";
-            OrderSort = 1;
-            Enabled = true;
-            CreateTime = DateTime.Now;
-            ModifyTime = DateTime.Now;
+            Name = name;    //角色名
+            Description = "";   //描述
+            OrderSort = 1;  //排序
+            Enabled = true; //是否激活
+            CreateTime = DateTime.Now;  //创建时间
+            ModifyTime = DateTime.Now;  //修改时间
 
         }
 

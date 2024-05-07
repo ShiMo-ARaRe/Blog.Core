@@ -16,7 +16,7 @@ namespace Blog.Core.Model.Models
         }
 
         /// <summary>
-        /// 菜单执行Action名
+        /// 菜单执行Action名（路由操作
         /// </summary>
         [SugarColumn(Length = 50, IsNullable = true)]
         public string Code { get; set; }
@@ -35,7 +35,7 @@ namespace Blog.Core.Model.Models
         [SugarColumn(IsNullable = true)]
         public bool? IsHide { get; set; } = false;
         /// <summary>
-        /// 是否keepAlive
+        /// 是否keepAlive（是否存活
         /// </summary>
         [SugarColumn(IsNullable = true)]
         public bool? IskeepAlive { get; set; } = false;
@@ -102,22 +102,25 @@ namespace Blog.Core.Model.Models
         [SugarColumn(IsNullable = true)]
         public bool? IsDeleted { get; set; }
 
-
+        /*  下面这些属性都被标记为[SugarColumn(IsIgnore = true)]，这意味着在使用Sugar ORM（一个对象关系映射库）与数据库进行交互时，
+            这些属性将被忽略，它们不会映射到数据库表的任何列。*/
         [SugarColumn(IsIgnore = true)]
-        public List<string> PnameArr { get; set; } = new List<string>();
+        public List<string> PnameArr { get; set; } = new List<string>();//存储路由菜单名的列表
         [SugarColumn(IsIgnore = true)]
-        public List<string> PCodeArr { get; set; } = new List<string>();
+        public List<string> PCodeArr { get; set; } = new List<string>();//存储菜单执行Action名的列表
         [SugarColumn(IsIgnore = true)]
-        public string MName { get; set; }
+        public string MName { get; set; }//存储接口名
 
         [SugarColumn(IsIgnore = true)]
         public bool hasChildren { get; set; } = true;
+        //用于标记这个权限是否有子权限。这在构建权限树或者在用户界面中展示权限层级结构时可能有用。
 
         [SugarColumn(IsIgnore = true)]
         public List<Permission> Children { get; set; } = new List<Permission>();
+        //用于存储这个权限的所有子权限。这在处理权限相关的逻辑时有用，例如，遍历一个权限及其所有子权限。
 
         [SugarColumn(IsIgnore = true)]
-        public Modules Module { get; set; }
+        public Modules Module { get; set; }//存储接口API地址信息
 
         //public virtual ICollection<ModulePermission> ModulePermission { get; set; }
         //public virtual ICollection<RoleModulePermission> RoleModulePermission { get; set; }

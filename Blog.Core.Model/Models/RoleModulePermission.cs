@@ -1,6 +1,30 @@
 ﻿using SqlSugar;
 using System;
 
+/*  在许多系统中，RoleModulePermission表，Role表，Modules表和Permission表通常用于实现角色基础的权限管理。
+    这四个表之间的关系，你去执行一下这个就懂了：
+
+-- 菜单执行Action名 代表 路由操作，由前端处理。
+-- 接口地址 代表 API请求：由后端处理。
+SELECT
+    r.Name AS 角色名,
+    m.Name AS 接口名称,
+    m.LinkUrl AS 接口地址,
+    p.Name AS 路由菜单名,
+    p.Code AS 菜单执行Action名,
+    rmp.RoleId,
+    rmp.ModuleId,
+    rmp.PermissionId
+FROM
+    rolemodulepermission AS rmp
+JOIN
+    role AS r ON rmp.roleid = r.id
+JOIN
+    modules AS m ON rmp.ModuleId = m.Id
+JOIN
+    permission AS p ON rmp.PermissionId = p.Id;
+ */
+
 namespace Blog.Core.Model.Models
 {
     /// <summary>
@@ -21,7 +45,7 @@ namespace Blog.Core.Model.Models
         /// </summary>
         [SugarColumn(IsNullable = true)]
         public bool? IsDeleted { get; set; }
-       
+
         /// <summary>
         /// 创建ID
         /// </summary>

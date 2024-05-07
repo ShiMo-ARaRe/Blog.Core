@@ -12,12 +12,12 @@ namespace Blog.Core.Model.Models
 
         public UserRole(long uid, long rid)
         {
-            UserId = uid;
-            RoleId = rid;
-            CreateTime = DateTime.Now;
+            UserId = uid;   //用户ID
+            RoleId = rid;   //角色ID
+            CreateTime = DateTime.Now;  //创建时间
             IsDeleted = false;
             CreateId = uid;
-            CreateTime = DateTime.Now;
+            ModifyTime = DateTime.Now;  //修改时间
         }
 
 
@@ -26,7 +26,7 @@ namespace Blog.Core.Model.Models
         /// </summary>
         [SugarColumn(IsNullable = true)]
         public bool? IsDeleted { get; set; }
-       
+
         /// <summary>
         /// 创建ID
         /// </summary>

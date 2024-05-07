@@ -4,6 +4,11 @@
         <name>Blog.Core.Model</name>
     </assembly>
     <members>
+        <member name="T:Blog.Core.Model.ApiResponse">
+            <summary>
+            API响应对象
+            </summary>
+        </member>
         <member name="F:Blog.Core.Model.AuthorityScopeEnum.NONE">
             <summary>
             无任何权限
@@ -488,12 +493,12 @@
         </member>
         <member name="P:Blog.Core.Model.Models.Modules.Name">
             <summary>
-            名称
+            接口名称
             </summary>
         </member>
         <member name="P:Blog.Core.Model.Models.Modules.LinkUrl">
             <summary>
-            菜单链接地址
+            菜单链接地址（接口地址
             </summary>
         </member>
         <member name="P:Blog.Core.Model.Models.Modules.Area">
@@ -508,7 +513,7 @@
         </member>
         <member name="P:Blog.Core.Model.Models.Modules.Action">
             <summary>
-            Action名称
+            Action名称（方法名称
             </summary>
         </member>
         <member name="P:Blog.Core.Model.Models.Modules.Icon">
@@ -638,7 +643,7 @@
         </member>
         <member name="P:Blog.Core.Model.Models.Permission.Code">
             <summary>
-            菜单执行Action名
+            菜单执行Action名（路由操作
             </summary>
         </member>
         <member name="P:Blog.Core.Model.Models.Permission.Name">
@@ -658,7 +663,7 @@
         </member>
         <member name="P:Blog.Core.Model.Models.Permission.IskeepAlive">
             <summary>
-            是否keepAlive
+            是否keepAlive（是否存活
             </summary>
         </member>
         <member name="P:Blog.Core.Model.Models.Permission.Func">
@@ -1248,6 +1253,31 @@
         <member name="P:Blog.Core.Model.Models.SubLibraryBusinessTable.Amount">
             <summary>
             金额
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Model.Models.TestMuchTableResult.moduleName">
+            <summary>
+            存储接口名
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Model.Models.TestMuchTableResult.permName">
+            <summary>
+            存储路由菜单名
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Model.Models.TestMuchTableResult.rid">
+            <summary>
+            存储角色的ID
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Model.Models.TestMuchTableResult.mid">
+            <summary>
+            存储接口的ID
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Model.Models.TestMuchTableResult.pid">
+            <summary>
+            用于路由菜单的ID
             </summary>
         </member>
         <member name="T:Blog.Core.Model.Models.Topic">
