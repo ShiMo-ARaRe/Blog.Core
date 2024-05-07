@@ -19,7 +19,7 @@ namespace Blog.Core.Extensions
     {
         public static void AddAuthorizationSetup(this IServiceCollection services)
         {
-            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (services == null) throw new ArgumentNullException(nameof(services));//检查 services 参数是否为空，如果为空则抛出异常
 
             // 以下四种常见的授权方式。
 
@@ -42,16 +42,16 @@ namespace Blog.Core.Extensions
 
             #region 参数
             //读取配置文件
-            var symmetricKeyAsBase64 = AppSecretConfig.Audience_Secret_String;
-            var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsBase64);
-            var signingKey = new SymmetricSecurityKey(keyByteArray);
-            var Issuer = AppSettings.app(new string[] { "Audience", "Issuer" });
-            var Audience = AppSettings.app(new string[] { "Audience", "Audience" });
+            var symmetricKeyAsBase64 = AppSecretConfig.Audience_Secret_String;  //拿取密钥
+            var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsBase64);   //将密钥转换为字节数组
+            var signingKey = new SymmetricSecurityKey(keyByteArray);    //准备加密key
+            var Issuer = AppSettings.app(new string[] { "Audience", "Issuer" });    //发行人
+            var Audience = AppSettings.app(new string[] { "Audience", "Audience" });    //听众
 
-            var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+            var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256); //签名凭据
 
             // 如果要数据库动态绑定，这里先留个空，后边处理器里动态赋值
-            var permission = new List<PermissionItem>();
+            var permission = new List<PermissionItem>();    //权限项列表
 
             // 角色与接口的权限要求参数
             var permissionRequirement = new PermissionRequirement(
@@ -68,7 +68,7 @@ namespace Blog.Core.Extensions
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(Permissions.Name,
-                         policy => policy.Requirements.Add(permissionRequirement));
+                         policy => policy.Requirements.Add(permissionRequirement));//策略授权扩展，把代码逻辑放到其他文件中
             });
 
 
@@ -88,10 +88,70 @@ namespace Blog.Core.Extensions
             //});
 
             // 这里冗余写了一次,因为很多人看不到
+            #region http
+            /*  为什么 将<IHttpContextAccessor, HttpContextAccessor> 注册成单例服务？
+                提高性能：每个请求到达时，ASP.NET Core 会创建一个新的 HttpContext 对象，其中包含了当前请求的上下文信息。
+
+                HttpContextAccessor 实例的作用是提供对当前请求的 HttpContext 对象的访问。
+                当我们在应用程序的其他组件中获取 IHttpContextAccessor 实例，并通过它访问 HttpContext 属性时，实际上获取到的是当前请求的 HttpContext 对象。
+
+                由于每个请求都有自己的 HttpContext 对象，因此不同请求之间的 HttpContext 是相互隔离的。
+                这意味着每个请求可以独立地访问和管理自己的上下文信息，而不会相互干扰。
+
+                如果 IHttpContextAccessor 是瞬态或作用域服务，那么每次请求都会创建一个新的 HttpContextAccessor 实例，这可能会导致性能下降。
+                将 IHttpContextAccessor 注册为单例服务时，所有请求共享相同的 HttpContextAccessor 实例，但每个请求都会有自己独立的 HttpContext 对象。
+             */
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            // 注入权限处理器
+            /*  当其他组件需要访问当前 HTTP 上下文时，它们可以通过依赖注入方式获取 IHttpContextAccessor 实例，并使用该实例访问当前 请求的上下文信息。
+                上下文信息通过 HttpContext 对象暴露给应用程序，当前请求的上下文信息包括以下内容：
+               
+                Request（请求）：
+                请求方法（GET、POST、PUT、DELETE 等）。
+                请求的 URL、路径和查询字符串。
+                请求的头部信息（User-Agent、Content-Type 等）。
+                请求的内容（请求体）。
+
+                Response（响应）：
+                响应的状态码（200、404、500 等）。
+                响应的头部信息（Content-Type、Cache-Control 等）。
+                响应的内容（响应体）。
+
+                User（用户）：
+                用户身份验证信息（Claims）。
+                用户角色和权限信息。
+                用户标识信息（用户 ID、用户名等）。
+
+                Session（会话）：
+                会话状态信息。
+                会话过期时间。
+                会话数据（存储在服务器端的用户特定数据）。
+
+                Cookies（Cookie）：
+                请求中的 Cookie。
+                响应中设置的 Cookie。
+
+                Connection（连接）：
+                客户端 IP 地址。
+                请求的协议（HTTP、HTTPS）。
+                客户端和服务器之间的连接信息。
+
+                Server（服务器）：
+                服务器信息（主机名、端口号等）。
+                应用程序的环境变量和配置信息。
+            */
+            #endregion
+
+            #region 注入权限处理器
+            /*  PermissionHandler 是一个自定义的授权处理器，
+             *  它继承自 AuthorizationHandler<>类，所以实现了 IAuthorizationHandler 接口，
+             *  用于处理与权限要求相关的授权逻辑。*/
             services.AddScoped<IAuthorizationHandler, PermissionHandler>();
+            /*  注册了一个单例服务，将一个新的 PermissionRequirement 对象添加到服务容器中。
+             *  PermissionRequirement 是一个封装了 权限项 的类。
+             *  通过将它注册为单例服务，可以在应用程序中的其他地方获取到同一个 PermissionRequirement 实例，
+             *  确保在整个应用程序中 共享相同的 权限项列表。*/
             services.AddSingleton(permissionRequirement);
+            #endregion
         }
     }
 }

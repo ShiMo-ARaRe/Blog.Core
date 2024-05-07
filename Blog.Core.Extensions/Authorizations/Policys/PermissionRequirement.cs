@@ -16,7 +16,7 @@ namespace Blog.Core.AuthHelper
         /// 用户权限集合，一个订单包含了很多详情，
         /// 同理，一个网站的认证发行中，也有很多权限详情(这里是Role和URL的关系)
         /// </summary>
-        public List<PermissionItem> Permissions { get; set; }
+        public List<PermissionItem> Permissions { get; set; }   //权限项列表
         /// <summary>
         /// 无权限action
         /// </summary>
@@ -55,8 +55,8 @@ namespace Blog.Core.AuthHelper
         /// <param name="permissions">权限集合</param>
         /// <param name="claimType">声明类型</param>
         /// <param name="issuer">发行人</param>
-        /// <param name="audience">订阅人</param>
-        /// <param name="signingCredentials">签名验证实体</param>
+        /// <param name="audience">订阅人（听众）</param>
+        /// <param name="signingCredentials">签名验证实体（签名凭据）</param>
         /// <param name="expiration">过期时间</param>
         public PermissionRequirement(string deniedAction, List<PermissionItem> permissions, string claimType, string issuer, string audience, SigningCredentials signingCredentials, TimeSpan expiration)
         {

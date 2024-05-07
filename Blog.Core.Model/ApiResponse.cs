@@ -1,10 +1,13 @@
 ﻿namespace Blog.Core.Model
 {
+    /// <summary>
+    /// API响应对象
+    /// </summary>
     public class ApiResponse
     {
-        public int Status { get; set; } = 200;
-        public string Value { get; set; } = "";
-        public MessageModel<string> MessageModel = new MessageModel<string>() { };
+        public int Status { get; set; } = 200;  //响应的状态码
+        public string Value { get; set; } = ""; //响应的值
+        public MessageModel<string> MessageModel = new MessageModel<string>() { };  //响应的消息模型
 
         public ApiResponse(StatusCode apiCode, string msg = null)
         {
@@ -47,10 +50,10 @@
 
     public enum StatusCode
     {
-        CODE200,
-        CODE401,
-        CODE403,
-        CODE404,
-        CODE500
+        CODE200,    //成功
+        CODE401,    //未授权
+        CODE403,    //通过身份验证，但权限不够
+        CODE404,    //资源未找到
+        CODE500     //服务器内部错误
     }
 }

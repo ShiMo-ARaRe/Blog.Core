@@ -2,8 +2,16 @@
 
 namespace Blog.Core.Common.Helper
 {
+    /// <summary>
+    /// 提供了一些用于处理日期和时间的辅助方法
+    /// </summary>
     public class DateHelper
     {
+        /// <summary>
+        /// 将时间戳字符串转换为DateTime对象
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
         public static DateTime StampToDateTime(string time)
         {
             time = time.Substring(0, 10);
@@ -13,6 +21,12 @@ namespace Blog.Core.Common.Helper
             return dateTime;
         }
 
+        /// <summary>
+        /// 计算两个DateTime对象之间的时间差，并返回一个格式化的字符串表示。
+        /// </summary>
+        /// <param name="time1"></param>
+        /// <param name="time2"></param>
+        /// <returns></returns>
         public static string TimeSubTract(DateTime time1,DateTime time2)
         {
             TimeSpan subTract = time1.Subtract(time2);

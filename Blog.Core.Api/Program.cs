@@ -81,7 +81,7 @@ builder.Services.AddRedisInitMqSetup();
 builder.Services.AddIpPolicyRateLimitSetup(builder.Configuration);
 builder.Services.AddSignalR().AddNewtonsoftJsonProtocol();
 
-builder.Services.AddAuthorizationSetup();
+builder.Services.AddAuthorizationSetup();   //配置授权
 if (Permissions.IsUseIds4 || Permissions.IsUseAuthing)
 {
     if (Permissions.IsUseIds4) builder.Services.AddAuthentication_Ids4Setup();
@@ -89,7 +89,7 @@ if (Permissions.IsUseIds4 || Permissions.IsUseAuthing)
 }
 else
 {
-    builder.Services.AddAuthentication_JWTSetup();
+    builder.Services.AddAuthentication_JWTSetup();  //配置鉴权
 }
 
 builder.Services.AddScoped<UseServiceDIAttribute>();
