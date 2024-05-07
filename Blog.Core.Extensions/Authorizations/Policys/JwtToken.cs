@@ -18,15 +18,15 @@ namespace Blog.Core.AuthHelper
         /// <returns></returns>
         public static TokenInfoViewModel BuildJwtToken(Claim[] claims, PermissionRequirement permissionRequirement)
         {
-            var now = DateTime.Now;
+            var now = DateTime.Now; //获取当前时间
             // 实例化JwtSecurityToken
             var jwt = new JwtSecurityToken(
-                issuer: permissionRequirement.Issuer,
-                audience: permissionRequirement.Audience,
-                claims: claims,
-                notBefore: now,
-                expires: now.Add(permissionRequirement.Expiration),
-                signingCredentials: permissionRequirement.SigningCredentials
+                issuer: permissionRequirement.Issuer,   //发行者
+                audience: permissionRequirement.Audience,   //受众
+                claims: claims, //声明
+                notBefore: now, //令牌生效时间
+                expires: now.Add(permissionRequirement.Expiration), //过期时间
+                signingCredentials: permissionRequirement.SigningCredentials    // 签名凭据等参数
             );
             // 生成 Token
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
@@ -36,8 +36,8 @@ namespace Blog.Core.AuthHelper
             {
                 success = true,
                 token = encodedJwt,
-                expires_in = permissionRequirement.Expiration.TotalSeconds,
-                token_type = "Bearer"
+                expires_in = permissionRequirement.Expiration.TotalSeconds, //过期时间
+                token_type = "Bearer"   //令牌类型
             };
             return responseJson;
         }
